@@ -252,7 +252,11 @@ class UndefinedConstraint extends Constraint
                     $this->appliedDefaults[] = $currentProperty;
                 }
             }
-        } elseif (isset($schema->items) && LooseTypeCheck::isArray($value)) {
+        } elseif (
+            isset($schema->items) &&
+            LooseTypeCheck::isArray($schema->items) &&
+            LooseTypeCheck::isArray($value)
+        ) {
             // $value is an array, and items are defined - treat as plain array
             foreach ($schema->items as $currentItem => $itemDefinition) {
                 if (
