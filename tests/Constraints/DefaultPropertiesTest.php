@@ -164,6 +164,11 @@ class DefaultPropertiesTest extends VeryBaseTestCase
                 '{"items":{"default":"b"}, "minItems": 3}',
                 '["a","b","b"]'
             ),
+            array(// #24 fill an array with an exclusiveMinimum
+                '["a"]',
+                '{"items":{"default":"b"}, "minItems": 3, "exclusiveMinimum": true}',
+                '["a","b","b","b"]'
+            ),
         );
     }
 
