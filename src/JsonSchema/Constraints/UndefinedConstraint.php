@@ -256,14 +256,8 @@ class UndefinedConstraint extends Constraint
             $items = array();
             if (LooseTypeCheck::isArray($schema->items)) {
                 $items = $schema->items;
-            } elseif (isset($schema->minItems)) {
-                $minItems = $schema->minItems;
-                if (isset($schema->exclusiveMinimum) && $schema->exclusiveMinimum) {
-                    $minItems++;
-                }
-                if (count($value) < $minItems) {
-                    $items = array_fill(count($value), $minItems - count($value), $schema->items);
-                }
+            } elseif (isset($schema->minItems) && count($value) < $schema->minItems) {
+                $items = array_fill(count($value), $schema->minItems - count($value), $schema->items);
             }
             // $value is an array, and items are defined - treat as plain array
             foreach ($items as $currentItem => $itemDefinition) {
